@@ -21,7 +21,7 @@ def index(request):
     filepath = os.path.join(BASE_PATH, 'client/index.html')
     with open(filepath, 'rb') as file:
         return web.Response(body=file.read(), content_type='text/html')
-    
+
 # ------------------------------------------------------------------------------
 # handle chat demo
 def chat_msg_handler(msg, session):
@@ -65,15 +65,15 @@ def arduino_coro(app):
 # setup and teardown background tasks
 @asyncio.coroutine
 def start_background_tasks(app):
-    app['spam_coro'] = app.loop.create_task(spam_coro(app))
+    # app['spam_coro'] = app.loop.create_task(spam_coro(app))
     app[ARDUINO_CORO] = app.loop.create_task(arduino_coro(app))
 
 
 @asyncio.coroutine
 def cleanup_background_tasks(app):
-    app['spam_coro'].cancel()
+    # app['spam_coro'].cancel()
     app[ARDUINO_CORO].cancel()
-    yield from app['spam_coro']
+    # yield from app['spam_coro']
     yield from app[ARDUINO_CORO]
 
 # ------------------------------------------------------------------------------
@@ -100,6 +100,7 @@ if __name__ == '__main__':
 
     # add routes
     app.router.add_route('GET', '/', index)
+    app.router.add_static('/assets', './client/assets')
     sockjs.add_endpoint(app, chat_msg_handler, name=SOCKJS_MNGR, prefix='/sockjs/')
     
     # add serial port connection

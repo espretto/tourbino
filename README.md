@@ -1,4 +1,11 @@
 
+build
+-----
+```
+pyinstaller --onefile neva.spec
+.\dist\neva.exe
+```
+
 serial port testing
 -------------------
 
