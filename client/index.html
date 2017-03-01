@@ -13,6 +13,9 @@
 
     .nv-header {
       position: fixed;
+      top: 0;
+      left: 0;
+      overflow: auto;
       width: 100%;
       height: 110px;
       line-height: 110px;
@@ -22,6 +25,7 @@
     .nv-header img {
       display: inline-block;
       vertical-align: middle;
+      margin-right: 16px;
     }
 
     .nv-left { float: left; }
@@ -31,14 +35,16 @@
 <body>
 
   <div class="nv-header">
-    <img class="nv-left" src="assets/logo-neva.jpg" alt="neva-aero">
-    <img class="nv-right" src="assets/logo-angers.png" alt="Université d'Angers">
-    <img class="nv-right" src="assets/logo-istia.png" alt="ISTIA">
+    <img src="assets/logo-neva.jpg" alt="neva-aero">
+    <div class="nv-right">
+      <img src="assets/logo-angers.png" alt="Université d'Angers">
+      <img style="height: 90px; width: auto" src="assets/logo-istia.png" alt="ISTIA">
+    </div>
   </div>
 
   <!-- custom ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-  <main>
+  <main style="margin-top: 120px">
     <h3>Chat!</h3>
     <div id="protocols" style="float: right">
       <ul>
