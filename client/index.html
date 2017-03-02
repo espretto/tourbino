@@ -2,49 +2,374 @@
 <html>
 <head>
   <meta charset="utf-8">
-  
+  <link rel="stylesheet" href="assets/css/normalize-5.0.0.css">
+  <link rel="stylesheet" href="assets/css/icons.css">
   <!-- custom ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
   <style>
-    html, body {
-      padding: 0;
-      margin: 0;
+
+  /* ---------------------------------------------------------------------------
+   * global (based on normalize.css)
+   */
+    body {
+      font-family: "Open Sans",Arial,Helvetica,sans-serif;
     }
 
-    .nv-header {
-      position: fixed;
-      top: 0;
-      left: 0;
+    progress::-moz-progress-bar {
+      background-color: #4692c8;
+    }
+
+  /* ---------------------------------------------------------------------------
+   * helpers
+   */
+    .nv-left { float: left; }
+    .nv-right { float: right; }
+    .nv-hfill { height: 100%; }
+    .nv-text-right { text-align: right }
+
+    .tar { text-align: right; }
+    .tac { text-align: center; }
+
+
+  /* ---------------------------------------------------------------------------
+   * page header
+   */
+    .nv-page-header {
       width: 100%;
-      height: 110px;
-      line-height: 110px;
+      height: 100px;
+      line-height: 100px;
       background-color: #182983;
     }
 
-    .nv-header img {
+    .nv-logo {
       display: inline-block;
       vertical-align: middle;
+      height: 80%;
+      width: auto;
       margin-right: 16px;
     }
 
-    .nv-logo-neva { margin-top: -4px }
-    .nv-logo-istia { height: 90px; width: auto; }
+    .nv-logo-neva { height: 100%; }
 
-    .nv-left { float: left; }
-    .nv-right { float: right; }
+  /* ---------------------------------------------------------------------------
+   * navigation
+   */
+    .nv-nav {
+      display: inline-block;
+      vertical-align: bottom;
+      line-height: 0;
+    }
+
+    .nv-hlist {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nv-tab {
+      display: inline-block;
+      float: left;
+      height: 28px;
+      margin-right: 3px;
+
+      background-color: #ddd;
+      /*border-radius: 8px 8px 0 0;
+      box-shadow: inset 1px 1px 1px #999, inset -1px 1px 1px #999;*/
+    }
+
+    .nv-tab-active {
+      background-color: #fff;
+    }
+
+    .nv-tab > a {
+      display: inline-block;
+      padding: 0 12px;
+
+      font: 700 14px/28px "Open Sans",Arial,Helvetica,sans-serif;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #182983;
+    }
+
+    .nv-tab > a:hover { color: #4692c8; }
+
+  /* ---------------------------------------------------------------------------
+   * main
+   */
+  .nv-page { padding: 32px; }
+  .nv-content { width: 1024px; }
+  .nv-section { display: block; margin-top: 24px; }
+  .nv-section:first-child { margin-top: 0; }
+
+  /* ---------------------------------------------------------------------------
+   * control bar
+   */
+  .nv-control { width: 420px; float: left;}
+  .nv-realtime { width: 420px; float: left; margin-left: 48px; padding-top:95px;}
+
+  /* ---------------------------------------------------------------------------
+   * toolbar
+   */
+  .nv-toolbar { width: 100%; overflow: auto; background-color: #eee }
+
+  .nv-tool {
+    display: inline-block;
+    float: left;
+    padding: 8px 12px;
+
+    color: #182983;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .nv-tool > i { font-size: 16px; display: block; }
+  .nv-tool:hover { background-color: #ddd; color: #4692c8; }
+
+  /* ---------------------------------------------------------------------------
+   * table
+   */
+
+  .nv-stages { width: 420px; border-spacing: 0; border-collapse: collapse; }
+  .nv-stages tbody { font-family: Consolas; }
+  .nv-stages th,
+  .nv-stages td { font-size: 12px; border-bottom: solid 1px #999; padding: 8px 8px 4px; }
+  .nv-stages th { text-transform: uppercase; text-align: left; }
+  .nv-stages td:nth-child(3),
+  .nv-stages th:nth-child(3) { border-right: none }
+  .nv-stages td:nth-child(4),
+  .nv-stages th:nth-child(4) { border-left: none; }
+  .nv-stages-summary { font-weight: bold }
+
+
+  @color: #31901A; /* green */
+  @color: #159A89; /* truquoise */
+  @color: #83159A; /* violette */
+  @color: #902613; /* rouge */
+  
+
   </style>
 </head>
 <body>
 
-  <div class="nv-header">
-    <img class="nv-logo-neva" src="assets/logo-neva.jpg" alt="neva-aero">
-    <div class="nv-right">
-      <img src="assets/logo-angers.png" alt="Université d'Angers">
-      <img class="nv-logo-istia" src="assets/logo-istia.png" alt="ISTIA">
+  <div class="nv-page-header">
+    
+    <img class="nv-left nv-logo nv-logo-neva" src="assets/img/logo-neva.png" alt="neva-aero">
+
+    <nav class="nv-nav">
+      <ul class="nv-hlist">
+        <li class="nv-tab nv-tab-active"><a href="#capture">Capture</a></li>
+        <li class="nv-tab"><a href="#config">Config</a></li>
+        <li class="nv-tab"><a href="#about">About</a></li>
+      </ul>
+    </nav>
+
+    <div class="nv-right nv-hfill">
+      <img class="nv-logo" src="assets/img/logo-angers.png" alt="Université d'Angers">
+      <img class="nv-logo" src="assets/img/logo-istia.png" alt="ISTIA">
     </div>
   </div>
 
-  <!-- custom ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <main class="nv-page">
+    <div class="nv-control">
+   
+      <nav class="nv-section nv-toolbar">
+        <ul class="nv-hlist">
+          <li class="nv-tool"><i class="nv-play"></i><span>start</span></li>
+          <li class="nv-tool"><i class="nv-stop"></i><span>stop</span></li>
+          <li class="nv-tool"><i class="nv-pause"></i><span>pause</span></li>
+          <li class="nv-tool"><i class="nv-download"></i><span>save</span></li>
+          <li class="nv-tool"><i class="nv-info-circled"></i><span>info</span></li>
+        </ul>
+      </nav>
+    
+      <div class="nv-section">
+        <table class="nv-stages">
+          <thead>
+            <tr>
+              <th>stage</th>
+              <th>consigne</th>
+              <th>progress</th>
+              <th>time</th>
+              <th>persist</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tar">1</td>
+              <td class="tar">10%</td>
+              <td><progress value="100" max="100"></progress></td>
+              <td class="tar">60/60s</td>
+              <td class="tac"><input type="checkbox" checked=""></td>
+            </tr>
+            <tr>
+              <td class="tar">2</td>
+              <td class="tar">0%</td>
+              <td><progress value="100" max="100"></progress></td>
+              <td class="tar">10/10s</td>
+              <td class="tac"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td class="tar">3</td>
+              <td class="tar">20%</td>
+              <td><progress value="40" max="60"></progress></td>
+              <td class="tar">40/60s</td>
+              <td class="tac"><input type="checkbox" checked=""></td>
+            </tr>
+            <tr>
+              <td class="tar">4</td>
+              <td class="tar">0%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/10s</td>
+              <td class="tac"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td class="tar">5</td>
+              <td class="tar">30%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/60s</td>
+              <td class="tac"><input type="checkbox" checked=""></td>
+            </tr>
+            <tr>
+              <td class="tar">6</td>
+              <td class="tar">0%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/10s</td>
+              <td class="tac"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td class="tar">7</td>
+              <td class="tar">40%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/60s</td>
+              <td class="tac"><input type="checkbox" checked=""></td>
+            </tr>
+            <tr>
+              <td class="tar">8</td>
+              <td class="tar">0%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/10s</td>
+              <td class="tac"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td class="tar">9</td>
+              <td class="tar">50%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/60s</td>
+              <td class="tac"><input type="checkbox" checked=""></td>
+            </tr>
+            <tr>
+              <td class="tar">10</td>
+              <td class="tar">0%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/10s</td>
+              <td class="tac"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td class="tar">11</td>
+              <td class="tar">60%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/60s</td>
+              <td class="tac"><input type="checkbox" checked=""></td>
+            </tr>
+            <tr>
+              <td class="tar">12</td>
+              <td class="tar">0%</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">0/10s</td>
+              <td class="tac"><input type="checkbox"></td>
+            </tr>
+            <tr>
+              <td class="tar">...</td>
+              <td class="tar">...</td>
+              <td><progress value="0" max="100"></progress></td>
+              <td class="tar">...</td>
+              <td class="tac"><input type="checkbox"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nv-realtime">
+      <div class="nv-section">
+        <canvas id="alpha" width="570" height="120"></canvas>
+      </div>
+      <div class="nv-section">
+        <canvas id="beta" width="570" height="120"></canvas>
+      </div>
+      <div class="nv-section">
+        <canvas id="gamma" width="570" height="120"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/smoothie.js"></script>
+  <script>
+    (function (global) {
+
+      var document = global.document
+        , SmoothieChart = global.SmoothieChart
+        , TimeSeries = global.TimeSeries
+        , Date = global.Date
+
+      var config =
+      { grid:
+        {
+          fillStyle: '#eeeeee',   // the background colour of the chart
+          lineWidth: 1,           // the pixel width of grid lines
+          strokeStyle: '#ddd', // colour of grid lines
+          millisPerLine: 1000,    // distance between vertical grid lines
+          sharpLines: false,      // controls whether grid lines are 1px sharp, or softened
+          verticalSections: 5,    // number of vertical sections marked out by horizontal grid lines
+          borderVisible: true     // whether the grid lines trace the border of the chart or not
+        }
+      }
+
+      var charts = {
+        alpha:
+        { strokeStyle: 'rgb(144, 38, 19)' //#902613'
+        , fillStyle:'rgba(144, 38, 19, 0.3)'
+        , lineWidth: 2
+        }
+      , beta:
+        { strokeStyle:'#159A89'
+        , fillStyle:'rgba(51, 154, 137, 0.3)'
+        , lineWidth: 2
+        }
+      , gamma:
+        { strokeStyle:'#83159A'
+        , fillStyle:'rgba(131, 21, 154, 0.3)'
+        , lineWidth: 2
+        }
+      }
+      
+      var series = Object.keys(charts).map(function (id) {
+        var canvas = document.getElementById(id)
+          , chart = new SmoothieChart(config)
+          , serie = new TimeSeries()
+
+        chart.streamTo(canvas)
+        chart.addTimeSeries(serie, charts[id])
+
+        return serie
+      })
+
+      function onMessage () {
+        series.forEach(function (serie) {
+          serie.append(Date.now(), Math.random()*5)
+        })
+      }
+
+      setInterval(onMessage, 1000)
+
+    }(this, SmoothieChart))
+
+  </script>
+
+  <!-- custom
 
   <main style="margin-top: 120px">
     <h3>Chat!</h3>
@@ -178,5 +503,6 @@
       });
     });
   </script>
+  -->
 </body>
 </html>

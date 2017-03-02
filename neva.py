@@ -4,6 +4,7 @@ import serial
 import asyncio
 from aiohttp import web
 
+APP_CONFIG = 'config'
 SOCKJS_MNGR = 'chat'
 ARDUINO_CORO = 'arduino_coro'
 ARDUINO_PORT = 'arduino_port'
@@ -84,36 +85,68 @@ def close_open_connections(app):
     yield from mngr.clear()
     mngr.stop()
 
+def noop (*args, **kwargs):
+    pass
+
+def toUrl (host, port, protocol='http'):
+    return '%s://%s:%d' % (protocol, host, port)
+
+@asyncio.coroutine
+def open_browser (app):
+    import webbrowser
+    config = app[APP_CONFIG]
+
+    try:
+        if hasattr(config, 'browser'):
+            browser = webbrowser.get(config.browser)
+        else:
+            browser = webbrowser.get()
+
+        browser.open_new_tab(toUrl(config.host, config.port))
+    except webbrowser.Error as err:
+        sys.exit(err)
+
 # ------------------------------------------------------------------------------
 # main
-if __name__ == '__main__':
+def create_app():
     loop = asyncio.get_event_loop()
-
-    # optional logging
-    # ---
-    # import logging
-    # logging.basicConfig(level=logging.DEBUG,
-    #                     format='%(asctime)s %(levelname)s %(message)s')
-
-    # create web app - contains pseudo global variables
     app = web.Application(loop=loop)
 
-    # add routes
+    # routing
     app.router.add_route('GET', '/', index)
     app.router.add_static('/assets', './client/assets')
     sockjs.add_endpoint(app, chat_msg_handler, name=SOCKJS_MNGR, prefix='/sockjs/')
     
     # add serial port connection
-    app[ARDUINO_PORT] = serial.Serial('COM1', 9600)
+    # app[ARDUINO_PORT] = serial.Serial('COM1', 9600)
 
     # bind lifecycle hooks
-    app.on_startup.append(start_background_tasks)
-    app.on_cleanup.append(cleanup_background_tasks)
-    app.on_shutdown.append(close_open_connections)
+    app.on_startup.append(open_browser)
+    # app.on_startup.append(start_background_tasks)
+    # app.on_cleanup.append(cleanup_background_tasks)
+    # app.on_shutdown.append(close_open_connections)
 
-    # kick off
+    return app
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--host', help="host ip address", default="localhost")
+    parser.add_argument('-p', '--port', help="host port", type=int, default=8080)
+    parser.add_argument('-b', '--browser', help="browser to load the application")
+    config = parser.parse_args()
+
+    # create web app
+    app = create_app()
+
+    # populate app config
+    app[APP_CONFIG] = config
+
     try:
-        web.run_app(app)
-        print("Server started at http://127.0.0.1:8080")
+        print('Turbino starting at %s' % toUrl(config.host, config.port))
+        web.run_app(app, print=noop, host=config.host, port=config.port)
     except KeyboardInterrupt:
         pass
+
+    # import webbrowser
+    # help(webbrowser.get())

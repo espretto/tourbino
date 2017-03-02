@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2017 by original authors @ fontello.com</metadata>
+<defs>
+<font id="neva" horiz-adv-x="1000" >
+<font-face font-family="neva" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="pause" unicode="&#xf00e;" d="M0 5q0-27 19-46t45-19h127q27 0 45 19t19 46v691q0 27-19 45t-45 19h-127q-27 0-45-19t-19-45v-691z m480 0q0-27 19-46t45-19h127q26 0 45 19t19 46v691q0 27-19 45t-45 19h-127q-27 0-45-19t-19-45v-691z" horiz-adv-x="735.4" />
+
+<glyph glyph-name="play" unicode="&#xf00f;" d="M0 11v677q0 39 22 52t53-8l564-349q20-14 20-33 0-9-5-18t-10-12l-5-4-564-349q-31-20-53-7t-22 51z" horiz-adv-x="658.7" />
+
+<glyph glyph-name="download" unicode="&#xf02e;" d="M0 84v73q0 33 24 56t57 24 56-24 24-56v-73q0-17 12-29t30-13h531q18 0 30 13t12 29v73q0 33 24 56t56 24 57-24 24-56v-73q0-84-59-143t-144-60h-531q-84 0-144 60t-59 143z m155 359q0 33 24 57 23 23 56 23t57-23l105-106v344q0 33 24 57t56 23 57-23 24-57v-344l110 110q24 24 57 24t56-24q24-23 24-56t-24-57l-247-247q-24-25-57-25-32 0-56 25l-242 242q-24 24-24 57z" horiz-adv-x="937.5" />
+
+<glyph glyph-name="stop" unicode="&#xf080;" d="M0 4v691q0 26 19 45t45 21h693q27 0 45-19t19-46v-691q0-27-19-46t-45-20h-693q-26 0-45 19t-19 46z" horiz-adv-x="821.3" />
+
+<glyph glyph-name="info-circled" unicode="&#xf085;" d="M0 350q0 95 37 182t100 149 149 100 183 37q95 0 182-37t149-100 100-149 37-182q0-95-37-182t-100-150-149-100-182-37q-96 0-183 37t-149 100-100 150-37 182z m398 170q0-29 20-46t51-17q32 0 51 17t19 46-19 45-51 17q-32 0-51-17t-20-45z m5-402h132v299h-132v-299z" horiz-adv-x="937.5" />
+</font>
+</defs>
+</svg>
